@@ -1,0 +1,4 @@
+# bot's token file
+.bot-token
+# build dir
+dist-newstyle/**/*
