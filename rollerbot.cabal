@@ -5,7 +5,7 @@ version:            0.1.0
 synopsis: dice rolling discord bot
 
 -- A longer description of the package.
-description: roll arbitrary numbers of dice of arbitrary face count, i.e. "!role 5d8" to role 5 8-sided dice.
+description: roll arbitrary numbers of dice of arbitrary face count, i.e. "!roll 5d8" to role 5 8-sided dice.
              receive a discord embed back with the results
 
 -- A URL where users can report bugs.
@@ -26,7 +26,7 @@ executable rollerbot
     -- other-modules:
 
     -- LANGUAGE extensions used by modules in this package.
-    -- other-extensions:
+    default-extensions: OverloadedStrings
     build-depends:    base ^>=4.14.1.0,
                       text,
                       discord-haskell ^>=1.8.5,
