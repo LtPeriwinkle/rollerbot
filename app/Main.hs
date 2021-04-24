@@ -45,7 +45,7 @@ eventHandler event = case event of
                 embedFieldValue = "Please format your command as `!roll XdY` where X and Y are positive numbers.",
                 embedFieldInline = Just False
               }
-          xs ->
+          _ ->
             EmbedField
               { embedFieldName = "Results",
                 embedFieldValue = C.convertText (concatMap (\x -> if x == "," then ", " else x) (L.group $ init (tail $ show randList))),
@@ -82,14 +82,14 @@ genRandList (a, b)
 
 -- lol
 empty :: StdGen -> [Int]
-empty g = [0]
+empty _ = [0]
 
 parseDieInfo :: T.Text -> Maybe (Int, Int)
 parseDieInfo m = do
-  let split = span (/= 'd') $ dropWhile (`elem` ("!roll " :: [Char])) (C.convertText m :: String)
-  if snd split /= ""
+  let strs = span (/= 'd') $ dropWhile (`elem` ("!roll " :: [Char])) (C.convertText m :: String)
+  if snd strs /= ""
     then
-      let count = readMaybe $ fst split :: Maybe Int
-          sides = readMaybe (tail $ snd split) :: Maybe Int
+      let count = readMaybe $ fst strs :: Maybe Int
+          sides = readMaybe (tail $ snd strs) :: Maybe Int
        in if isJust count && isJust sides then Just (fromJust count, fromJust sides) else Nothing
     else Nothing
